@@ -65,9 +65,31 @@ server.post('/media', (req, resp) => {
 })
 
 
-server.get('/dia2/corprimaria', (req,resp)=> {
-    const 
+server.get('/dia2/corprimaria/:cor', (req,resp)=> {
+    try{
+        const cor = req.params.cor;
+        if(cor =="amarelo" || cor == "azul" || cor== "vermelho"){
+            resp.send({
+                cor:"true"
+            })
+        }else{
+            resp.send({
+                cor:"false"
+            })
+        }
+        }catch(err){
+            resp.status(404).send({
+                erro: err.message
+            })
+        }
 })
+   
+/* server.post('/dia2/maiornumero', (req,resp) => {
+    try{
+        const 
+    }
+})
+ */
 
 server.listen(process.env.PORT, 
                 () => console.log(`API online na porta ${process.env.PORT}`));
